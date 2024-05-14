@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.mapper.BoardMapper">
+
+	<select id="boardList" resultType="board">
+		select * from tbl_boards
+		order
+		by board_no
+	</select>
+
+	<select id="boardListPaging" parameterType="com.yedam.common.SearchVO">
+		select r.*
+		from(select rownum rn,a.*
+				from (select *
+					from tbl_boards b
+					where 
+					<choose>
+					  <when test="searchCondition == 'T'.toString()">
+					  title like '%'|| #{keyword}||'%'
+					  </when>
+					   <when test="searchCondition == 'W'.toString()">
+					   writer like '%'|| #{keyword}||'%'
+					   </when>
+					   <otherwise>
+					    title like '%'|| #{keyword}||'%'
+					    or writer like '%'|| #{keyword}||'%'
+					   </otherwise>
+					</choose>
+					order by b.board_no desc) a
+          <![CDATA[
+          where rownum <= (#{page} * 5)) r          
+          ]]>
+		where r.rn > (#{page} -1) *5
+	</select>
+	<select id="getTotalCnt" parameterType="com.yedam.common.SearchVO">
+		select count(1)
+		from tbl_boards
+		where 
+		<choose>
+		  <when test="searchCondition == 'T'.toString()">
+		  title like '%'|| #{keyword}||'%'
+		  </when>
+		   <when test="searchCondition == 'W'.toString()">
+		   writer like '%'|| #{keyword}||'%'
+		   </when>
+		   <otherwise>
+		    title like '%'|| #{keyword}||'%'
+		    or writer like '%'|| #{keyword}||'%'
+		   </otherwise>
+		</choose>
+	</select>
+	<insert id="insertBoard" parameterType="board">
+		insert into
+		tbl_boards(board_no,title,content,writer,img)
+		values(boards_seq.nextval,#{title},#{content},#{writer},#{img})
+	</insert>
+	<select id="selectBoard" resultType="board" parameterType="int">
+		select *
+		from tbl_boards
+		where board_no = #{boardNo}
+	</select>
+	<update id="updateViewCnt" parameterType="int">
+		update tbl_boards
+		set
+		view_cnt = view_cnt+1
+		where board_no= #{boardNo}
+	</update>
+	<update id="updateBoard" parameterType="board">
+		update tbl_boards
+		set
+		title =#{title},
+		content = #{content},
+		create_date = sysdate
+		where
+		board_no = #{boardNo}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		delete tbl_boards
+		where
+		board_no =#{boardNo}
+	</delete>
+	<select id="selectMember" resultType="member">
+		select*
+		from tbl_members
+		where user_id =#{id}
+		and user_pw = #{pw}
+	</select>
+	<select id="selectMember2" resultType="member">
+		select*
+		from tbl_members
+		where user_id =#{id}
+	</select>
+</mapper>
