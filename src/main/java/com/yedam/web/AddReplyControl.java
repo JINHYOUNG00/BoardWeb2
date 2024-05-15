@@ -32,7 +32,7 @@ public class AddReplyControl implements Control {
 		rvo.setReplier(replier);
 		rvo.setReply(reply);
 		
-		Map<String,Object> result = new HashMap<>(); 
+		Map<String,Object> result = new HashMap<>();
 		
 		ReplyService svc = new ReplyServiceImpl();
 		if(svc.addReply(rvo)) {

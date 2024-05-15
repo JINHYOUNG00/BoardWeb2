@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-	id="WebApp_ID" version="4.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
 	<display-name>myServlet</display-name>
 
 	<listener>
@@ -21,7 +18,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	
+
 	<filter>
 		<filter-name>respFilter</filter-name>
 		<filter-class>com.yedam.common.ResponseFilter</filter-class>
@@ -29,7 +26,7 @@
 			<param-name>response</param-name>
 			<param-value>/addForm.do</param-value>
 		</init-param>
-		
+
 	</filter>
 	<filter-mapping>
 		<filter-name>respFilter</filter-name>
@@ -54,7 +51,7 @@
 		<servlet-name>Tiles Dispatch Servlet</servlet-name>
 		<servlet-class>org.apache.tiles.web.util.TilesDispatchServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>Tiles Dispatch Servlet</servlet-name>
 		<url-pattern>*.tiles</url-pattern>

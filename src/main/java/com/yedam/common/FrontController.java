@@ -17,6 +17,7 @@ public class FrontController extends HttpServlet {
 	// 생성자.
 	public FrontController() {
 		map = new HashMap<>();
+		System.out.println("FrontController.FrontController 생성자 호출");
 	}
 
 	// init.
@@ -41,15 +42,14 @@ public class FrontController extends HttpServlet {
 		map.put("/replyList.do", new ReplyListControl());// 댓글보기
 		map.put("/removeReply.do", new RemoveReplyControl());// 댓글삭제
 		map.put("/addReply.do", new AddReplyControl()); // 댓글작성
-		map.put("/getTotalCnt.do", new TotalCountControl()); // 댓글작성
+		map.put("/getTotalCnt.do", new TotalCountControl()); // 댓글 총 갯수
 		
 		// 관리자권한.
 		map.put("/memberList.do", new MemberListControl()); 
 		
 		// 상품관련
 		map.put("/productList.do", new ProductListControl()); 
-		
-		
+		System.out.println("FrontController.init");
 		
 	}
 
@@ -60,12 +60,19 @@ public class FrontController extends HttpServlet {
 //		resp.setContentType("text/html;charset=utf-8"); //??
 //		resp.setCharacterEncoding("utf-8"); // 요청정보 한글처리
 		
-		
+		System.out.println("FrontController.service");
 		String uri = req.getRequestURI(); // url 에서 localhost 를 뺀
 		String context = req.getContextPath(); // 프로젝트 이름
 		System.out.println("uri: "+uri+", context: "+context);
 		String path = uri.substring(context.length());
+		System.out.println(context.length());
 		System.out.println("path: "+path); // 요청한 페이지
+		
+		Set<String> keySet = map.keySet();
+		
+		for (String string : keySet) {
+			System.out.println(string + ":" +  map.get(string));
+		}
 	
 		Control control = map.get(path);
 		control.exec(req,resp);
@@ -74,7 +81,7 @@ public class FrontController extends HttpServlet {
 	// destroy.
 	@Override
 	public void destroy() {
-
+		System.out.println("FrontController.destroy");
 	}
 
 }

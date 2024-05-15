@@ -12,7 +12,6 @@
 <!-- Expression Language -->
 	<p>${3<5}</p>
 	<a href="main.do">메인컨트롤 이동</a>
-	
 	<my:lines/>
 </body>
 </html>

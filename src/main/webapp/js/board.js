@@ -14,6 +14,7 @@ document.querySelector('.btn-danger').addEventListener('click', function() {
 // 댓글 목록 출력.
 let page = 1;
 showList();
+
 function showList() {
 	// 댓글목록을 초기화.
 	document.querySelectorAll('div.content ul li').forEach((li, idx) => {
@@ -21,19 +22,19 @@ function showList() {
 			li.remove();
 		}
 	})
-
 	svc.replyList(
-		{ bno: bno, page: page }, // replyList 첫번째 param 
+		{ bno: bno, page: page }, 	// replyList 첫번째 param 
 		result => {
 			result.forEach(reply => {
 				const row = makeRow(reply);
 				document.querySelector('div.reply ul').appendChild(row);
 			})
 			makePageInfo(); // createPageList();
-		}, // replyList 두번째 param
+			moveEndPage();
+		}, 							// replyList 두번째 param
 		err => {
 			console.log(err);
-		} // replyList 세번째 param
+		} 							// replyList 세번째 param
 	) // end of replyList;
 } // end of showList()
 
@@ -78,12 +79,23 @@ document.getElementById('addReply').addEventListener('click', function(e) {
 	} else {
 
 		svc.addReply(
-			{ bno: bno, replier: writer, reply: reply },
+			{ bno: bno, writer: writer, reply: reply },
 			result => {
 				if (result.retCode == 'OK') {
-					//location.reload();
 					const row = makeRow(result.retVal);
+					let allLi = document.querySelectorAll('div.content ul li');
+					let max = 0;
+					allLi.forEach((val, idx) => {
+						if(idx>max) {
+							max = idx;
+						}
+					})
+					
+					if (max <= 6) {
 					document.querySelector('div.reply ul').appendChild(row);
+					}
+					showList();
+					
 					alert('등록완료');
 				} else if (result.retCode == 'NG') {
 					alert('등록실패');
@@ -111,6 +123,22 @@ function makeRow(reply = {}) {
 
 // 댓글 페이징 생성.
 let pagination = document.querySelector('div.pagination');
+
+function moveEndPage() {
+	svc.getTotalCount(bno, //
+					(result) => {
+						let totalCnt = result.totalCount;
+						let endPage, realEnd;
+					
+						realEnd = Math.ceil(totalCnt / 5);
+						endPage = Math.ceil(page / 5) * 5;
+						endPage = endPage > realEnd ? realEnd : endPage;
+						
+						page = realEnd;
+					},
+					err => console.log(err)
+	)
+}
 
 
 function makePageInfo() {

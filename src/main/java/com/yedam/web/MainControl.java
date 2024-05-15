@@ -19,7 +19,7 @@ public class MainControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		String path = "WEB-INF/board/boardList.jsp";
 		path = "board/boardList.tiles";
 		
@@ -29,7 +29,6 @@ public class MainControl implements Control {
 		page = page == null ? "1" : page; // page 파라미터가 없으면 1 페이지로 하겠다.
 		
 		SearchVO search = new SearchVO();
-		
 		
 		search.setPage(Integer.parseInt(page));
 		search.setSearchCondition(sc);

@@ -7,7 +7,11 @@ import com.yedam.vo.ReplyVO;
 
 public interface ReplyService {
 	List<ReplyVO> replyList(SearchVO search);
+	
+	int totalCount(int boardNo);
+	
 	boolean removeReply(int replyNo); // 댓글삭제
-	boolean addReply(ReplyVO rvo); 
+	boolean addReply(ReplyVO rvo);
+	
 	
 }

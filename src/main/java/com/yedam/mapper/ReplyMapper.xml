@@ -20,6 +20,12 @@
 		where r.rn > (#{rpage} -1) * 5
 	</select>
 	
+	<select id="getTotalCnt" parameterType="int" resultType="int">
+		select count(1)
+		from tbl_replies
+		where board_no = #{boardNo}
+	</select>
+	
 	<delete id="deleteReply" parameterType="int">
 		delete from tbl_replies where reply_no = #{replyNo}
 	</delete>
