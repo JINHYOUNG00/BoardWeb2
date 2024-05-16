@@ -96,7 +96,7 @@ document.getElementById('addReply').addEventListener('click', function(e) {
 					}
 					showList();
 					
-					alert('등록완료');
+//					alert('등록완료');
 				} else if (result.retCode == 'NG') {
 					alert('등록실패');
 				} else {
@@ -129,12 +129,17 @@ function moveEndPage() {
 					(result) => {
 						let totalCnt = result.totalCount;
 						let endPage, realEnd;
-					
+						
 						realEnd = Math.ceil(totalCnt / 5);
 						endPage = Math.ceil(page / 5) * 5;
 						endPage = endPage > realEnd ? realEnd : endPage;
 						
+						if(totalCnt % 5 == 0){
+							console.log(totalCnt);
+							page = realEnd + 1;
+						} else {
 						page = realEnd;
+						}
 					},
 					err => console.log(err)
 	)

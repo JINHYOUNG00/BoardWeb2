@@ -18,5 +18,8 @@ public interface ReplyMapper {
 	// 댓글등록
 	int insertReply(ReplyVO rvo);
 	
+	// 댓글 수정
+	int updateReply(ReplyVO rvo);
+	
 	
 }

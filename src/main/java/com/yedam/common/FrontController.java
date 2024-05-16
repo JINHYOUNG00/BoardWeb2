@@ -42,7 +42,9 @@ public class FrontController extends HttpServlet {
 		map.put("/replyList.do", new ReplyListControl());// 댓글보기
 		map.put("/removeReply.do", new RemoveReplyControl());// 댓글삭제
 		map.put("/addReply.do", new AddReplyControl()); // 댓글작성
+		map.put("/modReply.do", new ModifyReplyControl()); // 댓글작성
 		map.put("/getTotalCnt.do", new TotalCountControl()); // 댓글 총 갯수
+		
 		
 		// 관리자권한.
 		map.put("/memberList.do", new MemberListControl()); 

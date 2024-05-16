@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jquary 연습</title>
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+</head>
+<body>
+	<div id="show"></div>
+	<div id="show2"></div>
+	<script>
+		// js vs. jquary
+		// <ul><li>apple</li><li>banana</li></ul>
+		
+		// jquary
+		let $ul = $('<ul />').append($('<li />').text('apple2'), $('<li>banana2</li>')		
+		); // jquary 객체
+		console.log($ul);
+		$('#show2').append($ul);
+		
+		// javascript
+		let ul = document.createElement('ul');
+		
+		let li = document.createElement('li');
+		li.innerText = 'apple';
+		ul.appendChild(li);
+		
+		li = document.createElement('li');
+		li.innerText = 'banana';
+		ul.appendChild(li);
+		
+		document.getElementById('show').appendChild(ul);
+	</script>
+</body>
+</html>

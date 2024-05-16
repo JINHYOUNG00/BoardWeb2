@@ -32,4 +32,9 @@ public class ReplyServiceImpl implements ReplyService {
 	public int totalCount(int boardNo) {
 		return mapper.getTotalCnt(boardNo);
 	}
+
+	@Override
+	public boolean modReply(ReplyVO rvo) {
+		return mapper.updateReply(rvo) == 1;
+	}
 }

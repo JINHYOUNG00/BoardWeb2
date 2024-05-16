@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jquerySelector</title>
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+</head>
+<body>
+	<div id="selector1">
+		<ul>
+			<li>Apple</li>
+			<li>Banana</li>
+			<li>Cherry</li>
+			<li>Melon</li>
+		</ul>
+	</div>
+	<button>선택</button>
+	<button>변경</button>
+	<script type="text/javascript">
+		// 
+		$('button:contains("선택")').on('click', function(){
+			// 선택한 요소의 모든 이전요소
+			$('ul li:lt(2)').css('color', 'red');
+			// 마지막 요소 == :last
+			$('ul li:last').css('background-color', 'yellow');
+			// ~ 요소가 아닌것 == :not()
+			$('ul li:not(:last)').css('background-color', 'pink');
+		});
+		
+		$('button:contains("변경")').on('click', function(){
+			$('ul li:lt(2)').css('background-color', 'red');
+			$('ul li:gt(1)').css('color', 'yellow');
+		});
+	</script>
+</body>
+</html>

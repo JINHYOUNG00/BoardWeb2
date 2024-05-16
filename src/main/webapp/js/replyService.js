@@ -21,6 +21,17 @@ const svc = {
 			.then(successCall)
 			.catch(errorCall);
 	},
+	modifyReply(param = {}, successCall, errorCall) {
+		fetch('modReply.do?',{
+			method: 'post',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: `rno=${param.rno}&content=${param.content}`
+		})
+			.then(resolve => resolve.json())
+			.then(successCall)
+			.catch(errorCall);
+		
+	},
 	// 댓글삭제 => 삭제할번호, 성공콜백, 실패콜백
 	removeReply(rno = 1, successCall, errorCall) {
 		fetch('removeReply.do?rno=' + rno)
@@ -35,4 +46,5 @@ const svc = {
 			.then(successCall)
 			.catch(errorCall);
 	}
+	
 } // end of svc.
