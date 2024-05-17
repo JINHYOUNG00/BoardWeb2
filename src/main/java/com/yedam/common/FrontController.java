@@ -17,7 +17,6 @@ public class FrontController extends HttpServlet {
 	// 생성자.
 	public FrontController() {
 		map = new HashMap<>();
-		System.out.println("FrontController.FrontController 생성자 호출");
 	}
 
 	// init.
@@ -51,8 +50,11 @@ public class FrontController extends HttpServlet {
 		
 		// 상품관련
 		map.put("/productList.do", new ProductListControl()); 
-		System.out.println("FrontController.init");
 		
+		// 장바구니관련
+		map.put("/cartList.do", new CartListControl()); 
+		map.put("/editCart.do", new EditCartControl()); 
+		map.put("/delCart.do", new DelCartControl());
 	}
 
 	// service.

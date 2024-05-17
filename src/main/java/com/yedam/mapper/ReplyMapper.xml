@@ -42,4 +42,21 @@
 		update tbl_replies set reply = #{reply} where reply_no = #{replyNo}
 	</update>
 	
+	<select id="selectList" resultType="com.yedam.vo.CartVO">
+		select * 
+		from tbl_cart
+		order by no
+	</select>
+	
+	<update id="updateCart" parameterType="com.yedam.vo.CartVO">
+		update tbl_cart
+		set qty = qty + #{qty}
+		where no = #{no}
+	</update>
+	
+	<delete id="deleteCart" parameterType="int">
+		delete from tbl_cart
+		where no = #{no}
+	</delete>
+	
 </mapper>
