@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yedam.common.SearchVO;
 import com.yedam.vo.CartVO;
+import com.yedam.vo.CenterVO;
 import com.yedam.vo.ReplyVO;
 
 public interface ReplyService {
@@ -20,6 +21,7 @@ public interface ReplyService {
 	boolean modifyCart(CartVO cvo);
 	boolean removeCart(int no);
 	
+	int addCenter(CenterVO[] array);
 	
 	
 }
